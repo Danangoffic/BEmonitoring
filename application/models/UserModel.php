@@ -11,8 +11,8 @@ class UserModel extends CI_Model
 		$this->db->where('a.UNAMA', $username);
 		$this->db->where('a.UPASS', $password);
 		$this->db->from('app_user a');
-		$this->db->join('detail_user b', 'b.UID = a.UID');
-		$this->db->join('divisi c', 'c.id = b.divisi');
+		$this->db->join('detail_user b', 'b.nrp = a.UNAMA');
+		$this->db->join('divisi c', 'c.id = a.UDISTRIK');
 		return $this->db->get();
 	}
 }
