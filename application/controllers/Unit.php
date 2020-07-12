@@ -140,7 +140,7 @@ class Unit extends CI_Controller
 		$data_no_unit = $this->Engine->get_where("*", $filter, $order, $group);
 		// echo $this->db->last_query();
 		// var_dump($jam);
-		if(!empty($jam)||$jam!==null||$jam==""||!$jam){
+		if($jam){
 			$time = explode(":", $jam);
 			$time2 = $time[0];
 			$filter .= "AND HOUR(jam_sekarang) = '$jam' ";

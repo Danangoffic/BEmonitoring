@@ -440,7 +440,7 @@ class ExportExcel extends CI_Controller
 								$unit = $key2->no_unit;
 								$where3 = $where2 . " AND a.no_unit = '$key2->no_unit'";
 								$group_by3 = "";
-								$order_by3 = "ORDER BY a.id DESC";
+								$order_by3 = "ORDER BY a.id ASC";
 								$limit3 = " LIMIT 1; ";
 								$insideData2 = $this->unit->customeGetDataWithJoin($select3, $join2, $where3, $group_by3, $order_by3, $limit3);
 								// echo $this->db->last_query();

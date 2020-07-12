@@ -220,6 +220,7 @@ class UnitModel extends CI_Model
 		$this->db->from('engine_operator a');
 		$this->db->join('activity_operator b', 'a.id_activity_operator = b.id');
 		$this->db->order_by("operator", 'ASC');
+		$this->db->order_by("waktu", 'ASC');
 		$this->db->order_by('a.id', 'ASC');
 		return $this->db->get();
 	}
