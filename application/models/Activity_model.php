@@ -20,7 +20,7 @@ class Activity_model extends CI_Model
 		$where = "kategori = 'AKTIVITAS' AND kode <> '001' and kode <> '002'";
 		$this->db->where($where);
 		$this->db->from('status');
-		$this->db->order_by('tampil ASC, kode ASC');
+		$this->db->order_by('tampil DESC, kode ASC');
 
 		return $this->db->get();
 	}

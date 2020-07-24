@@ -208,12 +208,7 @@ class UnitModel extends CI_Model
 	public function getDataToExcelAllInput($filter)
 	{
 		$this->db->where($filter);
-		$this->db->select('date(a.created_date) as tanggal, a.jam_sekarang as waktu, a.no_unit, (select nama from detail_user where detail_user.id = a.created_by) as operator, b.nrp as nrp, b.shift, b.days_of, a.segmen, a.muatan, b.hm_start, b.hm_stop, 
-						CASE 
-						WHEN (a.segmen=\'Aktifitas\') THEN (SELECT aktivitas FROM status WHERE id = a.activity_now)
-						WHEN (a.segmen=\'Metode\') THEN (SELECT metode FROM metode where id = a.metode)
-						ELSE a.keterangan
-						END AS keterangan,
+		$this->db->select('date(a.created_date) as tanggal, a.jam_sekarang as waktu, a.no_unit, (select nama from detail_user where detail_user.id = a.created_by) as operator, b.nrp as nrp, b.shift, b.days_of, a.segmen, a.muatan, b.hm_start, b.hm_stop, a.keterangan,
 						a.jam_engine as timer_start,
 						time((a.jam_engine- a.activity_time) + a.jam_engine) as timer_stop,
 						time(a.jam_engine- a.activity_time) as durasi, a.ritase_sekarang, a.ritase_sebelum, a.activity_time, a.status_time, a.all_productivity_unit, a.activity_productivity_unit, a.effectivness, a.validation, a.metode, a.activity_now, a.material');
