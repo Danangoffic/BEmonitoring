@@ -400,7 +400,7 @@ class ExportExcel extends CI_Controller
 				// SHEET 2
 				$worksheet2 = $spreadsheet->createSheet();
 				$worksheet2->setTitle('Database Hourly');
-				$table_columns = array("TANGGAL", "WAKTU", "C/N UNIT", "OPERATOR", "NRP", "SHIFT", "HARI KE", "HM START", "HM STOP", "TOTAL LOADING TIME", "TOTAL RITASE", "TOTAL MUATAN", "PRODUCTIVITY ALL", "PRODUCTIVITY ACT", "EFF. UNIT", "VALIDATION", "V. TIME", "V. PIC");
+				$table_columns = array("TANGGAL", "WAKTU", "C/N UNIT", "OPERATOR", "NRP", "SHIFT", "HARI KE", "HM START", "HM STOP", "TOTAL LOADING TIME", "TOTAL RITASE", "TOTAL MUATAN", "PRODUCTIVITY ALL", "PRODUCTIVITY ACT", "EFF. UNIT", "VALIDATION", "V. TIME", "V. PIC", "TOTAL ENGINE RUNNING");
 				$column = 0;
 
 				$excel_row = 2;
@@ -436,7 +436,7 @@ class ExportExcel extends CI_Controller
 											  END AS keterangan,
 											  a.jam_engine as timer_start,
 											  time((a.jam_engine- a.activity_time) + a.jam_engine) as timer_stop,
-											  time(a.jam_engine- a.activity_time) as durasi, a.ritase_sekarang, a.ritase_sebelum, a.activity_time, a.status_time, a.all_productivity_unit, a.activity_productivity_unit, a.effectivness, a.validation ";
+											  time(a.jam_engine- a.activity_time) as durasi, a.ritase_sekarang, a.ritase_sebelum, a.activity_time, a.status_time, a.all_productivity_unit, a.activity_productivity_unit, a.effectivness, a.validation, a.jam_engine as total_engine_time";
 								$unit = $key2->no_unit;
 								$where3 = $where2 . " AND a.no_unit = '$key2->no_unit'";
 								$group_by3 = "";
@@ -490,6 +490,9 @@ class ExportExcel extends CI_Controller
 									// $spreadsheet->getActiveSheet()->getStyle("R$excel_row")->getNumberFormat()->setFormatCode('H:MM:SS'); 
 									$spreadsheet->getActiveSheet()->getColumnDimension('R')->setAutoSize(true);
 									$worksheet2->setCellValueByColumnAndRow(17, $excel_row, $vpic);
+									
+									$worksheet2->setCellValueByColumnAndRow(18, $excel_row, $key2->total_engine_time);
+									$spreadsheet->getActiveSheet()->getColumnDimension('S')->setAutoSize(true);
 									$excel_row++;
 								}
 							}
