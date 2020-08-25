@@ -240,8 +240,8 @@ class ExportExcel extends CI_Controller
 		try {
 			$group = "b.no_unit";
 			$data = $this->unit->getDataToExcelAllInput($filter);
-			echo $this->db->last_query();
-			exit();
+			// echo $this->db->last_query();
+			// exit();
 			if ($data->num_rows() > 0) {
 				$result['data'] = $data->result();
 				$result['response'] = "success";
