@@ -52,5 +52,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['api/operator']['get']	=	'Operator/getAllOperator';
+$route['api/activity']['post']	=	'Operator/createActivity';
+$route['api/engine']['post']	=	'Operator/engineInput';
 
 $route['api/engine/create']['post'] = "Operator/engineInput";
+$route['api/muatan']['get']		=	'Muatan/getAll';
+$route['api/status']['get']		=	'Activity/getAllStatus';
+$route['api/activity']['get']	=	'Activity/index';
+// $route['api/activity']['get']	=	'Activity/getByKode';
+$route['api/material']['get']	=	'Material/get_all';
+$route['api/try-curl']['get']	=	'Activity/try_curl';

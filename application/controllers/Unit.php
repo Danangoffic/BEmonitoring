@@ -21,15 +21,13 @@ class Unit extends CI_Controller
 		try {
 			$data = $this->unit->getAll();
 			// echo $this->db->last_query();
-			$this->output
-			->set_status_header(200)
-			->set_content_type('application/json', 'utf-8')
-			->set_output(json_encode($data->result_array(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+			if($data->num_rows() > 0){
+				response(200, $data->result_array());
+			}else{
+				response(404, array('response'=>'Not Found'));
+			}
 		} catch (Exception $e) {
-			$this->output
-			->set_status_header(404)
-			->set_content_type('application/json', 'utf-8')
-			->set_output(json_encode(array('response'=>'Not Found'), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+			response(500, array('response'=>'Server Error'));
 		}
 
 	}
@@ -59,27 +57,15 @@ class Unit extends CI_Controller
 					}
 				}
 				if(count($allData) > 0){
-					$this->output
-					->set_status_header(200)
-					->set_content_type('application/json', 'utf-8')
-					->set_output(json_encode($allData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+					response(200, $allData);
 				}else{
-					$this->output
-					->set_status_header(404)
-					->set_content_type('application/json', 'utf-8')
-					->set_output(json_encode(array('response'=>"Data Engine Not Found"), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+					response(400, array('response'=>"Data Engine Not Found"));
 				}
 			}else{
-				$this->output
-				->set_status_header(404)
-				->set_content_type('application/json', 'utf-8')
-				->set_output(json_encode(array('response'=>"Filter Not Found"), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+				response(404, array('response'=>"Filter Not Found"));
 			}
 		} catch (Exception $e) {
-			$this->output
-			->set_status_header(500)
-			->set_content_type('application/json', 'utf-8')
-			->set_output(json_encode(array('response' => 'Server Exhausted'), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+			response(500, array('response' => 'Server Exhausted'));
 		}
 	}
 

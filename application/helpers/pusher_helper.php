@@ -18,3 +18,13 @@ if (!function_exists('Pusher'))
 		  $pusher->trigger('monitoring', 'my-event', json_encode($pesan));
 	}
 }
+if(!function_exists('response')){
+	function response(int $http_code=200, $array_data=array())
+	{
+		$response =& get_instance();
+		$response->output
+			->set_status_header($http_code)
+			->set_content_type('application/json', 'utf-8')
+			->set_output(json_encode($array_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+	}
+}
